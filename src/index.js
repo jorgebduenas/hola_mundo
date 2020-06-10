@@ -21,7 +21,7 @@ class App extends React.Component{
         return (
             <div>
                 <h1>Hola</h1>
-                <h2>mundo</h2>
+                <h2>mundo1</h2>
             </div>
         )
     }
