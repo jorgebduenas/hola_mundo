@@ -2,7 +2,6 @@
 
 import React from 'react'
 import Regards from'./regards'
-import ReactDom from 'react-dom'
 
 
 //Diferentes maneras de declarar componentes funcionales
@@ -10,7 +9,7 @@ import ReactDom from 'react-dom'
 //    return <div>Hola Mundo</div>
 //  }
 //  function App(){
-//      return <div></div>>
+//      return <div></div>
 //  }
 
 export default class App extends React.Component{
@@ -50,7 +49,7 @@ export default class App extends React.Component{
     render(){
         return (
             <div>
-                <Regards/>
+                <Regards objectName={this.state}/>
                 <button onClick={() => this.changeState({name:'Jorge',lastname:'Bautista'})}>Jorge</button>
                 <button onClick={() => this.changeState({name:'Fernando',lastname:'Jimenez'})}>Fernando</button>
                 <button onClick={() => this.changeState({name:'Ana',lastname:'Suarez'})}>Ana</button>
