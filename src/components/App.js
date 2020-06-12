@@ -1,8 +1,8 @@
 //Creacion del componentes
-
 import React from 'react'
-import Regards from'./regards'
-
+import Faker from 'faker'
+import Comments  from './comments'
+import Button from './button'
 
 //Diferentes maneras de declarar componentes funcionales
 //  const App = () =>{
@@ -12,22 +12,36 @@ import Regards from'./regards'
 //      return <div></div>
 //  }
 
-export default class App extends React.Component{
-    constructor(){   // constructor del componentes
+class App extends React.Component{
+    constructor(){                    // constructor del componente
         super()
-        this.state = { //estado principal, declaración de estado
+        //state para valor comments
+            this.state={
+                comments: []
+            }
+        /*  this.state = { //estado principal, declaración de estado
             name: 'Alberto',  //propiedades
-            lastname: 'Trujillo'
+            lastname: 'Trujillo' */
+            this.addComment = this.addComment.bind(this)
         }
 
-        //this.changeState = this.changeState.bind(this) //Ya no se necesita cuando tenemos el arrow function, único método para la función unica changeState()
-        
-/*      
+        addComment(){
+            let comment = {
+                userAvatar: Faker.image.avatar(),
+                name: Faker.name.firstName(),
+                date: Date.now().toLocaleString(),
+                comment: Faker.lorem.paragraph()
+            }
+            let copyState = this.state.comments
+            copyState.push(comment)
+            this.setState({comments:copyState})
+        }
+
+/*      this.changeState = this.changeState.bind(this) Ya no se necesita cuando tenemos el arrow function, único método para la función unica changeState()
         this.changeJorge = this.changeJorge.bind(this)      //bind es palabra reseervada, bind(this) vinculará   
         this.changeManuel = this.changeManuel.bind(this)    //todo lo que hay en el this el omponente   
         this.changeCarlos = this.changeCarlos.bind(this)    //en el this de la funcion ChangeState
 */
-    }
 
 /*
     changeJorge(){ //funcion ChangeState contiene parametros, propiedades o metodos
@@ -41,24 +55,38 @@ export default class App extends React.Component{
     changeCarlos(){
         this.setState({name:'Carlos',lastname:'Gonzalez'})
     }
-*/
+
     changeState(objectName){
         this.setState(objectName)
     }
-
+*/
     render(){
         return (
             <div>
-                <Regards objectName={this.state}/>
-                <button onClick={() => this.changeState({name:'Jorge',lastname:'Bautista'})}>Jorge</button>
-                <button onClick={() => this.changeState({name:'Fernando',lastname:'Jimenez'})}>Fernando</button>
-                <button onClick={() => this.changeState({name:'Ana',lastname:'Suarez'})}>Ana</button>
-                <button onClick={this.changeJorge}>Jorge</button>
-                <button onClick={this.changeManuel}>Manuel</button>
-                <button onClick={this.changeCarlos}>Carlos</button>             
+                {/*<Comments
+                    userAvatar={Faker.image.avatar()} 
+                    name={Faker.name.firstName()}
+                    date={Date.now().toLocaleString()}
+                    comment={Faker.lorem.paragraph()}
+                />*/}       
+
+                <Button func={this.addComment}/>
+                {
+                    this.state.comments.map((comment)=>{
+                        return <Comments 
+                            userAvatar={comment.userAvatar}
+                            name={comment.name}
+                            date={comment.date}
+                            comment={comment.comment}
+                        />
+                    })
+                }
+
+                <Comments/>
+                
             </div>
         )
     }
 }
 
-// export default App  también se puede exportar de esta manera
+export default App  // también se puede exportar de esta manera
